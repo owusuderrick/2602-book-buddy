@@ -21,10 +21,10 @@ export default function useQuery(resource, tag) {
       1;
     }
   };
-}
-useEffect(() => {
-  if (tag) provideTag(tag, query);
-  query();
-}, []);
+  useEffect(() => {
+    if (tag) provideTag(tag, query);
+    query();
+  }, []);
 
-return { data, loading, error };
+  return { data, loading, error };
+}

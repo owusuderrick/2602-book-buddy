@@ -1,5 +1,10 @@
 import { Routes, Route } from "react-router";
 import BookDetails from "./auth/BookDetails";
+import Layout from "./Layout";
+import Books from "./Books";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import Account from "./auth/Account";
 
 export default function App() {
   return (

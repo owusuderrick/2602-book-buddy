@@ -6,14 +6,17 @@ export default function Books() {
   const { data: books, loading, error } = useQuery("/books", "books");
 
   const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredBooks = books?.filter((book) =>
-    (book.title + book.author).toLowerCase().includes(searchTerm.toLowerCase),
-  );
-
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  console.log(filteredBooks);
   const updateSearchTerm = (formData) => {
     const term = formData.get("search");
-    setSearchTerm(search);
+
+    setFilteredBooks(
+      books.filter((book) =>
+        (book.title + book.author).toLowerCase().includes(term.toLowerCase()),
+      ),
+    );
+    setSearchTerm(term);
   };
 
   if (loading || !books) return <p>Loading...</p>;
@@ -28,15 +31,14 @@ export default function Books() {
       </form>
       <ul>
         {filteredBooks.map((book) => {
-          <Book book={book} key={book.id} />;
+          return <Book book={book} key={book.id} />;
         })}
       </ul>
-      ;
     </>
   );
 }
 
-function Book(book) {
+function Book({ book }) {
   return (
     <li>
       <img src={book.coverimage} alt={book.title} />

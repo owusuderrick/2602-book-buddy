@@ -7,7 +7,7 @@ export default function BookDetails() {
   const { token } = useAuth();
 
   const { id } = useParams();
-  const navigate = useNavigate
+  const navigate = useNavigate;
 
   const { data: book, loading, error } = useQuery(`/book/${id}`, "book");
 
@@ -16,9 +16,9 @@ export default function BookDetails() {
     "book",
   ]);
 
-  const reserveBook = () => {
+  const reserveBook = async () => {
     const success = await reserve({ bookId: id });
-    if (success) navigate("account ")
+    if (success) navigate("account ");
   };
 
   if (loading || !book) return <p>Loading...</p>;
