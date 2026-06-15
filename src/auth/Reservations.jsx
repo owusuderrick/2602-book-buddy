@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import useMutation from "../api/useMutation";
 
-export default function Reservations({ reservations }) {
+export default function Reservations({ reservation }) {
   return (
     <>
       <h2>Reservations</h2>

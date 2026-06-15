@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useQuery from "./api/useQuery";
 
 export default function Books() {
@@ -18,7 +18,15 @@ export default function Books() {
     );
     setSearchTerm(term);
   };
-
+  useEffect(() => {
+    setFilteredBooks(
+      books?.filter((book) =>
+        (book.title + book.author)
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()),
+      ),
+    );
+  }, [books]);
   if (loading || !books) return <p>Loading...</p>;
   if (error) return <p>Sorry! {error}</p>;
 
@@ -30,7 +38,7 @@ export default function Books() {
         <button>Search</button>
       </form>
       <ul>
-        {filteredBooks.map((book) => {
+        {filteredBooks?.map((book) => {
           return <Book book={book} key={book.id} />;
         })}
       </ul>
@@ -42,7 +50,7 @@ function Book({ book }) {
   return (
     <li>
       <img src={book.coverimage} alt={book.title} />
-      <Link to={`/book.${book.id}`}>
+      <Link to={`/books/${book.id}`}>
         <h2>{book.title}</h2>
       </Link>
       <p>{book.author}</p>

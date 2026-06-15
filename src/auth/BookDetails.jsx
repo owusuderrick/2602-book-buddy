@@ -7,9 +7,9 @@ export default function BookDetails() {
   const { token } = useAuth();
 
   const { id } = useParams();
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
-  const { data: book, loading, error } = useQuery(`/book/${id}`, "book");
+  const { data: book, loading, error } = useQuery(`/books/${id}`, "book");
 
   const { mutate: reserve } = useMutation("POST", "/reservations", [
     "books",

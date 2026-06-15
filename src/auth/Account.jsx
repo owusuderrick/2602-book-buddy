@@ -1,5 +1,5 @@
 import useQuery from "../api/useQuery";
-
+import Reservations from "./Reservations";
 export default function Account() {
   const { data: account, loading, error } = useQuery("/users/me", "account");
 
